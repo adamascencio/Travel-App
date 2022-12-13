@@ -1,0 +1,6 @@
+.home-grid {
+  display: grid;
+  grid-template-columns: clamp(150px, 40%, 500px) 1fr;
+  justify-items: stretch;
+  column-gap: 40px;
+}

@@ -1,0 +1,22 @@
+.heading {
+  font-size: var(--fs-section-heading);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-row > .css-1nrlq1o-MuiFormControl-root {
+  width: 40%;
+  max-width: 150px;
+}
+
+.input-row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.location-col {
+  margin-top: 20px;
+  height: 70vh;
+  overflow: auto;
+}

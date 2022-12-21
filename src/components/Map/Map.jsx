@@ -19,7 +19,7 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
           defaultCenter={{ lat: 0, lng: 0 }}
           center={coordinates}
           defaultZoom={14}
-          options={''}
+          options={{ disableDefaultUI: true, zoomControl: true }}
           onChange={(evt) => {
             setCoordinates({ lat: evt.center.lat, lng: evt.center.lng });
             setBounds({ ne: evt.marginBounds.ne, sw: evt.marginBounds.sw });

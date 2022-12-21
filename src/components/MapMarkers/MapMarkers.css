@@ -26,4 +26,5 @@
   position: absolute;
   cursor: pointer;
   row-gap: 10px;
+  z-index: 3;
 }

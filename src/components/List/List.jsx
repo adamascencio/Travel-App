@@ -4,11 +4,12 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import PlaceCard from '../../components/PlaceCard/PlaceCard';
 import './List.css';
 
-export default function List({ user, places, childClicked, isLoading, setIsLoading, type, setType, rating, setRating }) {
+export default function List({ places, childClicked, isLoading, setIsLoading, type, setType, rating, setRating }) {
   const [elRefs, setElRefs] = useState([]);
 
   useEffect(() => {
-    setElRefs((refs) => Array(places.length).fill().map((_, idx) => refs[idx] || createRef()));
+    const refs = Array(places.length).fill().map((_, idx) => elRefs[idx] || createRef());
+    setElRefs(refs);
   }, [places]);
   
   return (
@@ -37,8 +38,8 @@ export default function List({ user, places, childClicked, isLoading, setIsLoadi
         <Grid container spacing={3} className='location-col'>
           {places?.map((place, idx) => {
             return ( 
-              <Grid item key={idx} xs={12}>
-                <PlaceCard place={place} selected={Number(childClicked) === idx} ref={elRefs[idx]} />
+              <Grid item key={idx} xs={12} ref={elRefs[idx]}>
+                <PlaceCard place={place} selected={Number(childClicked) === idx} refProp={elRefs[idx]} />
               </Grid>
             );
           })}

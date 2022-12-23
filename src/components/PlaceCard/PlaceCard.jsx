@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyledEngineProvider } from '@mui/material/styles';
 import './PlaceCard.css';
 
-export default function PlaceCard({ place }) {
+export default function PlaceCard({ place, selected, refProp }) {
+  if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const awards = place?.awards?.map((award, idx) => {
     return (
       <Box display='flex' justifyContent='space-between' key={idx}>

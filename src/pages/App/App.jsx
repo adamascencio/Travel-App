@@ -32,12 +32,15 @@ export default function App() {
 
   // Get places data from Rapid API Travel Advisor
   // useEffect(function() {
-  //   async function getPlaces() {
-  //     const places = await getPlacesData(type, bounds.sw, bounds.ne);
-  //     setPlaces(places);
-  //     setFilteredPlaces([]);
-  //     setRating('');
-  //     setIsLoading(false);
+  //   if (bounds) {
+  //    setIsLoading(true);
+  //    async function getPlaces() {
+  //      const places = await getPlacesData(type, bounds.sw, bounds.ne);
+  //      setPlaces(places);
+  //      setFilteredPlaces([]);
+  //      setRating('');
+  //      setIsLoading(false);
+  //    }
   //   }
   //   getPlaces();
   // }, [type, coordinates, bounds]);
@@ -50,9 +53,9 @@ export default function App() {
   }, [rating]);
 
   // Add dummy data at start of app
-  useEffect(function() {
-    setPlaces(data.data.filter((place) => place.name !== undefined));
-  }, []);
+  // useEffect(function() {
+  //   setPlaces(data.data.filter((place) => place.name !== undefined));
+  // }, []);
 
   return (
     <main className="App">

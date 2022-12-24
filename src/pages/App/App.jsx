@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-// import { getPlacesData } from '../../utilities/places-service';
+import { getPlacesData } from '../../api/places-service';
 import NavDropdown from '../../components/NavDropdown/NavDropdown';
 import HomePage from '../HomePage/HomePage';
-import { data } from '../../dummy'
+// import { data } from '../../dummy'
 import './App.css';
 
 export default function App() {
@@ -36,13 +36,14 @@ export default function App() {
   //    setIsLoading(true);
   //    async function getPlaces() {
   //      const places = await getPlacesData(type, bounds.sw, bounds.ne);
-  //      setPlaces(places);
+  //      setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
   //      setFilteredPlaces([]);
   //      setRating('');
   //      setIsLoading(false);
+  //      console.log(places);
   //    }
+  //    getPlaces();
   //   }
-  //   getPlaces();
   // }, [type, coordinates, bounds]);
 
   // Filter places by rating

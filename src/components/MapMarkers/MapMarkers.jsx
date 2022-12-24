@@ -11,7 +11,7 @@ export function MapMarkers({ isMobile, place }) {
   function showLocationCard() {
     return (
       <Paper sx={{ ':hover': { boxShadow: 20 } }} className='map-card'>
-        <img src={place.photo.images.small.url} alt={place.name} />
+        {place.photo && <img src={place.photo.images.small.url} alt={place.name} />}
         <Typography align='left' variant='subtitle2'>{place.name}</Typography>
         <Rating value={parseFloat(place.rating)} readOnly />
       </Paper>

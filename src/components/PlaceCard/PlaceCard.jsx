@@ -42,10 +42,6 @@ export default function PlaceCard({ place, selected, refProp }) {
               <Typography>Ranking</Typography>
               <Typography variant='subtitle2'>{place.ranking}</Typography>
             </Box>
-            <Box display='flex' justifyContent='space-between' alignItems='center' >
-              <Typography></Typography>
-              <Typography variant='subtitle2'>{place.awards}</Typography>
-            </Box>
             {awards}
             <Box display='flex' justify-content='flex-start' align-items='center' sx={{ flexWrap: 'wrap', my: 2 }}>
               {place?.cuisine?.map(({name}, idx) => {

@@ -8,7 +8,7 @@ export default function PlaceCard({ place, selected, refProp }) {
   if (selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const awards = place?.awards?.map((award, idx) => (
       <Box display='flex' justifyContent='space-between' key={idx}>
-        <FontAwesomeIcon className='icon' icon={faAward} />
+        <FontAwesomeIcon className='award' icon={faAward} />
         <Typography variant='subtitle2' color='textSecondary'>{award.display_name}</Typography>
       </Box>
     )
@@ -42,7 +42,9 @@ export default function PlaceCard({ place, selected, refProp }) {
               <Typography>Ranking</Typography>
               <Typography variant='subtitle2'>{place.ranking}</Typography>
             </Box>
-            {awards}
+            <Box sx={{ my: 2 }} >
+              {awards}
+            </Box>
             <Box display='flex' justify-content='flex-start' align-items='center' sx={{ flexWrap: 'wrap', my: 2 }}>
               {place?.cuisine?.map(({name}, idx) => {
                 return <Chip key={idx} size='small' label={name} sx={{ mb: 0.5, mr: 0.5 }}/>;

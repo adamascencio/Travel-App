@@ -7,7 +7,7 @@ import './PlaceSearch.css';
 export default function PlaceSearch({ onPlaceChanged, onLoad, isMobile }) {
   return (
     <div className='search-row'>
-      <Typography variant='h8'>Explore new places</Typography>
+      {!isMobile && <Typography variant='h8'>Explore new places</Typography>}
       <div className='search-input'>
         <FontAwesomeIcon className='icon' icon={faMagnifyingGlass} />
         <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged} >

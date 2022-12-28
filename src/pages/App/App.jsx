@@ -55,6 +55,8 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rating]);
 
+  useEffect(() => setChildClicked(0), [places]);
+
   // Add dummy data at start of app
   // useEffect(function() {
   //   setPlaces(data.data.filter((place) => place.name !== undefined));

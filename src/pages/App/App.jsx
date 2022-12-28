@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { getPlacesData } from '../../api/places-service';
 import NavDropdown from '../../components/NavDropdown/NavDropdown';
 import HomePage from '../HomePage/HomePage';
-// import { data } from '../../dummy'
 import './App.css';
 
 export default function App() {
@@ -15,6 +14,13 @@ export default function App() {
   const [bounds, setBounds] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
+    });
+  }, []);
 
   const onLoad = (ac) => setAutocomplete(ac);
   const onPlaceChanged = () => {
@@ -41,7 +47,6 @@ export default function App() {
        setFilteredPlaces([]);
        setRating('');
        setIsLoading(false);
-       console.log(places);
      }
 
      getPlaces();
@@ -57,17 +62,13 @@ export default function App() {
 
   useEffect(() => setChildClicked(0), [places]);
 
-  // Add dummy data at start of app
-  // useEffect(function() {
-  //   setPlaces(data.data.filter((place) => place.name !== undefined));
-  // }, []);
-
   return (
     <main className="App">
       <NavDropdown 
         setCoordinates={setCoordinates} 
         onLoad={onLoad} 
         onPlaceChanged={onPlaceChanged} 
+        isMobile={isMobile}
       />
       <HomePage 
         places={filteredPlaces.length ? filteredPlaces : places}
@@ -79,7 +80,9 @@ export default function App() {
         setBounds={setBounds} 
         onLoad={onLoad} 
         onPlaceChanged={onPlaceChanged} 
-        isLoading={isLoading} setIsLoading={setIsLoading} 
+        isLoading={isLoading} 
+        setIsLoading={setIsLoading}
+        isMobile={isMobile} 
         type={type} 
         setType={setType} 
         rating={rating} 

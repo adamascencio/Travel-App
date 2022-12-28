@@ -40,7 +40,6 @@ export default function App() {
        setFilteredPlaces([]);
        setRating('');
        setIsLoading(false);
-       console.log(places);
      }
 
      getPlaces();

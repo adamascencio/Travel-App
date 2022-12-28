@@ -2,7 +2,7 @@ import List from "../../components/List/List";
 import Map from "../../components/Map/Map";
 import './HomePage.css';
 
-export default function HomePage({ coordinates, setCoordinates, bounds, setBounds, places, childClicked, setChildClicked, isLoading, setIsLoading, type, setType, rating, setRating }) {
+export default function HomePage({ coordinates, setCoordinates, bounds, setBounds, places, childClicked, setChildClicked, isLoading, setIsLoading, type, setType, rating, setRating, isMobile }) {
   return (
     <div className='home-grid'>
       <List 
@@ -14,6 +14,7 @@ export default function HomePage({ coordinates, setCoordinates, bounds, setBound
         setType={setType}
         rating={rating} 
         setRating={setRating}
+        isMobile={isMobile}
       />
       <Map 
         coordinates={coordinates} 
@@ -24,6 +25,7 @@ export default function HomePage({ coordinates, setCoordinates, bounds, setBound
         rating={rating}
         childClicked={childClicked}
         setChildClicked={setChildClicked}
+        isMobile={isMobile}
       />
     </div>
   );

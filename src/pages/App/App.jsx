@@ -14,6 +14,13 @@ export default function App() {
   const [bounds, setBounds] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
+    });
+  }, []);
 
   const onLoad = (ac) => setAutocomplete(ac);
   const onPlaceChanged = () => {
@@ -61,6 +68,7 @@ export default function App() {
         setCoordinates={setCoordinates} 
         onLoad={onLoad} 
         onPlaceChanged={onPlaceChanged} 
+        isMobile={isMobile}
       />
       <HomePage 
         places={filteredPlaces.length ? filteredPlaces : places}
@@ -72,7 +80,9 @@ export default function App() {
         setBounds={setBounds} 
         onLoad={onLoad} 
         onPlaceChanged={onPlaceChanged} 
-        isLoading={isLoading} setIsLoading={setIsLoading} 
+        isLoading={isLoading} 
+        setIsLoading={setIsLoading}
+        isMobile={isMobile} 
         type={type} 
         setType={setType} 
         rating={rating} 

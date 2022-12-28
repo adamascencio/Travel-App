@@ -1,10 +1,8 @@
 import GoogleMapReact from 'google-map-react';
 import { MapMarkers } from '../MapMarkers/MapMarkers';
-import { useMediaQuery } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material';
 
-export default function Map({ coordinates, setCoordinates, setBounds, places, setChildClicked }) {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+export default function Map({ coordinates, setCoordinates, setBounds, places, setChildClicked, isMobile }) {
   const markers = places?.map((place, idx) => {
     return <MapMarkers key={idx} lat={Number(place.latitude)} lng={Number(place.longitude)} place={place} isMobile={isMobile} />;
   });

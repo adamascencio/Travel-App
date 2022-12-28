@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getPlacesData } from '../../api/places-service';
 import NavDropdown from '../../components/NavDropdown/NavDropdown';
 import HomePage from '../HomePage/HomePage';
-import { data } from '../../dummy'
+// import { data } from '../../dummy'
 import './App.css';
 
 export default function App() {
@@ -31,20 +31,22 @@ export default function App() {
   }, []);
 
   // Get places data from Rapid API Travel Advisor
-  // useEffect(function() {
-  //   if (bounds) {
-  //    setIsLoading(true);
-  //    async function getPlaces() {
-  //      const places = await getPlacesData(type, bounds.sw, bounds.ne);
-  //      setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-  //      setFilteredPlaces([]);
-  //      setRating('');
-  //      setIsLoading(false);
-  //      console.log(places);
-  //    }
-  //    getPlaces();
-  //   }
-  // }, [type, coordinates, bounds]);
+  useEffect(function() {
+    if (bounds) {
+     setIsLoading(true);
+
+     async function getPlaces() {
+       const places = await getPlacesData(type, bounds.sw, bounds.ne);
+       setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
+       setFilteredPlaces([]);
+       setRating('');
+       setIsLoading(false);
+       console.log(places);
+     }
+
+     getPlaces();
+    }
+  }, [type, coordinates, bounds]);
 
   // Filter places by rating
   useEffect(() => {
@@ -54,9 +56,9 @@ export default function App() {
   }, [rating]);
 
   // Add dummy data at start of app
-  useEffect(function() {
-    setPlaces(data.data.filter((place) => place.name !== undefined));
-  }, []);
+  // useEffect(function() {
+  //   setPlaces(data.data.filter((place) => place.name !== undefined));
+  // }, []);
 
   return (
     <main className="App">

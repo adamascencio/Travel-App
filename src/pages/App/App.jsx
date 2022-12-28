@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { getPlacesData } from '../../api/places-service';
 import NavDropdown from '../../components/NavDropdown/NavDropdown';
 import HomePage from '../HomePage/HomePage';
-// import { data } from '../../dummy'
 import './App.css';
 
 export default function App() {
@@ -56,11 +55,6 @@ export default function App() {
   }, [rating]);
 
   useEffect(() => setChildClicked(0), [places]);
-
-  // Add dummy data at start of app
-  // useEffect(function() {
-  //   setPlaces(data.data.filter((place) => place.name !== undefined));
-  // }, []);
 
   return (
     <main className="App">

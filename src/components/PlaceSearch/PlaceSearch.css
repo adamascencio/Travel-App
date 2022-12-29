@@ -15,7 +15,6 @@
 
 input[type="text"] {
   width: clamp(200px, 40vw, 300px);
-  padding: 5px;
   text-align: center;
   border-radius: 10px;
   border: 2px solid var(--tan-3);
@@ -23,4 +22,9 @@ input[type="text"] {
 
 .icon, input[type='text'] {
   color: var(--white);
+}
+
+.res-fs {
+  font-size: var(--fs-nav-subheading) !important;
+  white-space: nowrap;
 }

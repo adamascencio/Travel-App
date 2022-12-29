@@ -1,6 +1,6 @@
 nav {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   justify-items: stretch;
   align-items: center;
   background-color: var(--nav-bg-color);
@@ -19,18 +19,8 @@ nav > div > h1 {
   text-align: left;
 }
 
-nav > div > ul {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  row-gap: 5px;
-}
-
 nav > div:last-child {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  column-gap: 20px;
-  margin-bottom: auto;
 }

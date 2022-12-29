@@ -12,6 +12,7 @@
   --text-dark: #615954;
   --fs-section-heading: clamp(1rem, 2vw, 1.5rem);
   --fs-h1: clamp(1.3rem, 3vw, 2rem);
+  --fs-nav-subheading: clamp(0.8rem, 2vw, 1.1rem);
 }
 
 *, *:before, *:after {

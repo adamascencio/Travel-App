@@ -4,7 +4,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import PlaceCard from '../../components/PlaceCard/PlaceCard';
 import './List.css';
 
-export default function List({ places, childClicked, isLoading, type, setType, rating, setRating }) {
+export default function List({ places, childClicked, isLoading, type, setType, rating, setRating, isMobile, showMapBtn }) {
   const [elRefs, setElRefs] = useState([]);
 
   useEffect(() => {

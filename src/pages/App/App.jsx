@@ -17,10 +17,10 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
+    window.innerWidth < 600 ? setIsMobile(true) : setIsMobile(false);
 
     window.addEventListener('resize', () => {
-      window.innerWidth < 768 ? setIsMobile(true) : setIsMobile(false);
+      window.innerWidth < 600 ? setIsMobile(true) : setIsMobile(false);
     });
   }, []);
 
@@ -41,19 +41,39 @@ export default function App() {
   // Get places data from Rapid API Travel Advisor
   useEffect(function() {
     if (bounds) {
-     setIsLoading(true);
+      setIsLoading(true);
 
-     async function getPlaces() {
-       const places = await getPlacesData(type, bounds.sw, bounds.ne);
-       setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-       setFilteredPlaces([]);
-       setRating('');
-       setIsLoading(false);
-     }
+      async function getPlaces() {
+        const places = await getPlacesData(type, bounds.sw, bounds.ne);
+        setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
+        setFilteredPlaces([]);
+        setRating('');
+        setIsLoading(false);
+      }
 
-     getPlaces();
+      getPlaces();
+    } else {
+      /* Set bounds with user's coordinates */
+      const sw = {
+        lat: coordinates.lat - 0.1,
+        lng: coordinates.lng - 0.1
+      }
+      const ne = {
+        lat: coordinates.lat + 0.1,
+        lng: coordinates.lng + 0.1
+      }
+
+      async function getPlacesWithDefaultBounds() {
+        const places = await getPlacesData(type, sw, ne);
+        setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
+        setFilteredPlaces([]);
+        setRating('');
+        setIsLoading(false);
+      }
+
+      getPlacesWithDefaultBounds();
     }
-  }, [type, coordinates, bounds]);
+  }, [type, bounds, coordinates]);
 
   // Filter places by rating
   useEffect(() => {

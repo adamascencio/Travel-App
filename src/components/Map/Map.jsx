@@ -1,6 +1,7 @@
 import GoogleMapReact from 'google-map-react';
 import { MapMarkers } from '../MapMarkers/MapMarkers';
 import { StyledEngineProvider } from '@mui/material';
+import './Map.css';
 
 export default function Map({ coordinates, setCoordinates, setBounds, places, setChildClicked, isMobile }) {
   const markers = places?.map((place, idx) => {
@@ -9,7 +10,7 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
 
   return (
     <StyledEngineProvider injectFirst>
-      <div style={{ height: '85vh', width: '100%' }}>
+      <div className='map' style={{ height: '84vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
           defaultCenter={{ lat: 0, lng: 0 }}

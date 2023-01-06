@@ -40,18 +40,18 @@ export default function App() {
 
   // Get places data from Rapid API Travel Advisor
   useEffect(function() {
+    async function getPlaces(type, sw, ne) {
+      const places = await getPlacesData(type, sw, ne);
+      setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
+      setFilteredPlaces([]);
+      setRating('');
+      setIsLoading(false);
+    }
+
+    setIsLoading(true);
+
     if (bounds) {
-      setIsLoading(true);
-
-      async function getPlaces() {
-        const places = await getPlacesData(type, bounds.sw, bounds.ne);
-        setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-        setFilteredPlaces([]);
-        setRating('');
-        setIsLoading(false);
-      }
-
-      getPlaces();
+      getPlaces(type, bounds.sw, bounds.ne);
     } else {
       /* Set bounds with user's coordinates */
       const sw = {
@@ -62,16 +62,7 @@ export default function App() {
         lat: coordinates.lat + 0.1,
         lng: coordinates.lng + 0.1
       }
-
-      async function getPlacesWithDefaultBounds() {
-        const places = await getPlacesData(type, sw, ne);
-        setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-        setFilteredPlaces([]);
-        setRating('');
-        setIsLoading(false);
-      }
-
-      getPlacesWithDefaultBounds();
+      getPlaces(type, sw, ne);
     }
   }, [type, bounds, coordinates]);
 

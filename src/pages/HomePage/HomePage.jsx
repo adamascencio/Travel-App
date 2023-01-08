@@ -1,4 +1,3 @@
-import { useState } from "react";
 import List from "../../components/List/List";
 import Map from "../../components/Map/Map";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";

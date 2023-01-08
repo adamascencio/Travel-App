@@ -4,8 +4,7 @@ import Map from "../../components/Map/Map";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import './HomePage.css';
 
-export default function HomePage({ coordinates, setCoordinates, bounds, setBounds, places, childClicked, setChildClicked, isLoading, setIsLoading, type, setType, rating, setRating, isMobile }) {
-  const [showMap, setShowMap] = useState(false);
+export default function HomePage({ coordinates, setCoordinates, bounds, setBounds, places, childClicked, setChildClicked, isLoading, setIsLoading, type, setType, rating, setRating, isMobile, showMap, setShowMap }) {
   const map = () => {
     return (
       <Map 

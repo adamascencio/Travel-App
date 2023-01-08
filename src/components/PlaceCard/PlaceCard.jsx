@@ -40,7 +40,7 @@ export default function PlaceCard({ place, selected, refProp }) {
             </Box>
             <Box display='flex' justifyContent='space-between' alignItems='center' >
               <Typography>Ranking</Typography>
-              <Typography variant='subtitle2'>{place.ranking}</Typography>
+              <Typography variant='subtitle2' align='right'>{place.ranking}</Typography>
             </Box>
             <Box sx={{ my: 2 }} >
               {awards}

@@ -1,8 +1,8 @@
 /* CSS Custom Properties */
 :root {
-  --body-bg-color: rgb(232, 235, 239);
-  --nav-bg-color: rgb(57, 66, 167);
-  --white: #FFFFFF;
+  --body-bg-color: #fefcea;
+  --nav-bg-color: #333;
+  --white: #FFF;
   --tan-1: #FBF9F6;
   --tan-2: #E7E2DD;
   --tan-3: #E2D9D1;
@@ -11,8 +11,9 @@
   --text-light: #968c84;
   --text-dark: #615954;
   --fs-section-heading: clamp(1rem, 2vw, 1.5rem);
-  --fs-h1: clamp(1.3rem, 3vw, 2rem);
+  --fs-h1: clamp(1.2rem, 3vw, 2rem);
   --fs-nav-subheading: clamp(0.8rem, 2vw, 1.1rem);
+  --google-ff: 'Montserrat', sans-serif;
 }
 
 *, *:before, *:after {
@@ -48,7 +49,8 @@ ul {
 }
 
 main {
-  padding: 80px 20px 0;
+  padding: 70px 20px 0;
+  height: 100vh;
 }
 
 #root {

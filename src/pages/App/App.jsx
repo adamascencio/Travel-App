@@ -27,7 +27,7 @@ export default function App() {
         setIsLoading(false);
       }
   }
-  
+
   const onLoad = (ac) => setAutocomplete(ac);
 
   const onPlaceChanged = () => {
@@ -40,7 +40,7 @@ export default function App() {
     }
   }
 
-
+  // Track window size to determine if mobile
   useEffect(() => {
     window.innerWidth < 600 ? setIsMobile(true) : setIsMobile(false);
 

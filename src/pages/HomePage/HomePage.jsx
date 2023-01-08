@@ -1,4 +1,3 @@
-import { useState } from "react";
 import List from "../../components/List/List";
 import Map from "../../components/Map/Map";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
@@ -46,8 +45,11 @@ export default function HomePage({ coordinates, setCoordinates, bounds, setBound
     
   return (
     <div className='home-grid'>
+      {/* Desktop */}
       { !isMobile && list() }
       { !isMobile && map() }
+
+      {/* Mobile */}
       { isMobile && showMapBtns() }
       { isMobile && !showMap && list() }
       { isMobile && showMap && map() }

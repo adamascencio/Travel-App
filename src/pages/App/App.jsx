@@ -18,6 +18,7 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMap, setShowMap] = useState(false);
 
+  // Get places data from Rapid API Travel Advisor 
   async function getPlaces(type, sw, ne) {
       const places = await getPlacesData(type, sw, ne);
       if (places) {

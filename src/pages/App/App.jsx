@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getPlacesData } from '../../api/places-service';
 import NavDropdown from '../../components/NavDropdown/NavDropdown';
-import HomePage from '../HomePage/HomePage';
+import List from '../../components/List/List';
+import Map from '../../components/Map/Map';
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import './App.css';
 
 export default function App() {
@@ -12,7 +14,6 @@ export default function App() {
   const [filteredPlaces, setFilteredPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
-  const [defaultBounds, setDefaultBounds] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -21,10 +22,13 @@ export default function App() {
   // Get places data from Rapid API Travel Advisor 
   async function getPlaces(type, sw, ne) {
       const places = await getPlacesData(type, sw, ne);
+      setFilteredPlaces([]);
+      setRating('');
       if (places) {
         setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-        setFilteredPlaces([]);
-        setRating('');
+        setIsLoading(false);
+      } else {
+        setPlaces([]);
         setIsLoading(false);
       }
   }
@@ -35,10 +39,6 @@ export default function App() {
     const lat = autocomplete.getPlace().geometry.location.lat();
     const lng = autocomplete.getPlace().geometry.location.lng();
     setCoordinates({lat, lng});
-    if (isMobile && !showMap) {
-      setIsLoading(true);
-      getPlaces(type, defaultBounds.sw, defaultBounds.ne);
-    }
   }
 
   // Track window size to determine if mobile
@@ -57,37 +57,25 @@ export default function App() {
     });
   }, []);
 
-  // Set default bounds for List view on mobile
-  useEffect(() => {
-    if (coordinates.lat) {
-      const sw = {
-        lat: coordinates.lat - 0.1,
-        lng: coordinates.lng - 0.1
-      }
-      const ne = {
-        lat: coordinates.lat + 0.1,
-        lng: coordinates.lng + 0.1
-      }
-      setDefaultBounds({sw, ne});
-    }
-  }, [coordinates]);
-
   // Get places data from Rapid API Travel Advisor
   useEffect(function() {
     setIsLoading(true);
     if (bounds) {
       getPlaces(type, bounds.sw, bounds.ne);
     } else {
-      const sw = {
-        lat: coordinates.lat - 0.1,
-        lng: coordinates.lng - 0.1
+      if (coordinates) {
+        const sw = {
+          lat: coordinates.lat - 0.1,
+          lng: coordinates.lng - 0.1
+        }
+        const ne = {
+          lat: coordinates.lat + 0.1,
+          lng: coordinates.lng + 0.1
+        }
+        getPlaces(type, sw, ne);
       }
-      const ne = {
-        lat: coordinates.lat + 0.1,
-        lng: coordinates.lng + 0.1
-      }
-      getPlaces(type, sw, ne);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, bounds, coordinates]);
 
   // Filter places by rating
@@ -99,6 +87,45 @@ export default function App() {
 
   useEffect(() => setChildClicked(0), [places]);
 
+  const map = () => {
+    return (
+      <Map 
+        coordinates={coordinates} 
+        setCoordinates={setCoordinates} 
+        bounds={bounds}
+        setBounds={setBounds}
+        places={filteredPlaces.length ? filteredPlaces : places}
+        rating={rating}
+        childClicked={childClicked}
+        setChildClicked={setChildClicked}
+        isMobile={isMobile}
+      />
+    );
+   }
+   const list = () => {
+    return (
+      <List 
+        places={filteredPlaces.length ? filteredPlaces : places} 
+        childClicked={childClicked}
+        isLoading={isLoading} 
+        setIsLoading={setIsLoading} 
+        type={type}
+        setType={setType}
+        rating={rating} 
+        setRating={setRating}
+        isMobile={isMobile}
+      />
+    );
+   }
+   const showMapBtns = () => {
+    return (
+      <ToggleButtonGroup className='map-ctrl-btns'>
+        <ToggleButton selected={!showMap} value={false} onClick={() => setShowMap(false)}>List</ToggleButton>
+        <ToggleButton selected={showMap} value={true} onClick={() => setShowMap(true)}>Map</ToggleButton>
+      </ToggleButtonGroup>
+    );
+   };
+
   return (
     <main className="App">
       <NavDropdown 
@@ -107,26 +134,16 @@ export default function App() {
         onPlaceChanged={onPlaceChanged} 
         isMobile={isMobile}
       />
-      <HomePage 
-        places={filteredPlaces.length ? filteredPlaces : places}
-        childClicked={childClicked}
-        setChildClicked={setChildClicked}
-        coordinates={coordinates} 
-        setCoordinates={setCoordinates} 
-        bounds={bounds} 
-        setBounds={setBounds} 
-        onLoad={onLoad} 
-        onPlaceChanged={onPlaceChanged} 
-        isLoading={isLoading} 
-        setIsLoading={setIsLoading}
-        isMobile={isMobile} 
-        type={type} 
-        setType={setType} 
-        rating={rating} 
-        setRating={setRating}   
-        showMap={showMap}
-        setShowMap={setShowMap}
-      />
+      <div className='home-grid'>
+        {/* Desktop */}
+        { !isMobile && list() }
+        { !isMobile && map() }
+
+        {/* Mobile */}
+        { isMobile && showMapBtns() }
+        { isMobile && !showMap && list() }
+        { isMobile && showMap && map() }
+      </div>
     </main>
   );
 }

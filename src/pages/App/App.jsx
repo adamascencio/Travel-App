@@ -113,7 +113,6 @@ export default function App() {
         setType={setType}
         rating={rating} 
         setRating={setRating}
-        isMobile={isMobile}
       />
     );
    }

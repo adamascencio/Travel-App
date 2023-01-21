@@ -57,23 +57,21 @@ export default function App() {
     });
   }, []);
 
-  // Get places data from Rapid API Travel Advisor
+  // Get places data from Rapid API Travel Advisor (Desktop)
   useEffect(function() {
     setIsLoading(true);
-    if (bounds) {
+    if ((!isMobile && bounds) || (isMobile && showMap)) {
       getPlaces(type, bounds.sw, bounds.ne);
-    } else {
-      if (coordinates) {
-        const sw = {
-          lat: coordinates.lat - 0.1,
-          lng: coordinates.lng - 0.1
-        }
-        const ne = {
-          lat: coordinates.lat + 0.1,
-          lng: coordinates.lng + 0.1
-        }
-        getPlaces(type, sw, ne);
+    } else if (isMobile && coordinates && !showMap) {
+      const sw = {
+        lat: coordinates.lat - 0.1,
+        lng: coordinates.lng - 0.1
       }
+      const ne = {
+        lat: coordinates.lat + 0.1,
+        lng: coordinates.lng + 0.1
+      }
+      getPlaces(type, sw, ne);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, bounds, coordinates]);

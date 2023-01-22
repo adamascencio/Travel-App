@@ -25,8 +25,8 @@ export default function App() {
     setFilteredPlaces([]);
     setRating('');
     if (places) {
+      console.log('I ran!')
       setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-      console.log('places set');
       setIsLoading(false);
     } else {
       setPlaces([]);
@@ -67,7 +67,7 @@ export default function App() {
   }, [type, bounds, showMap, isMobile]);
 
   useEffect(function() {
-    if (isMobile && coordinates) {
+    if (isMobile && coordinates && !showMap) {
       setIsLoading(true);
       const sw = {
       lat: coordinates.lat - 0.1,
@@ -79,7 +79,7 @@ export default function App() {
       }
       getPlaces(type, sw, ne);
     }
-  }, [coordinates, isMobile, type]);
+  }, [coordinates, isMobile, type, showMap]);
 
   // Filter places by rating
   useEffect(() => {

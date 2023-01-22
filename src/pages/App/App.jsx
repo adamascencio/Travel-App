@@ -25,7 +25,6 @@ export default function App() {
     setFilteredPlaces([]);
     setRating('');
     if (places) {
-      console.log('I ran!')
       setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
       setIsLoading(false);
     } else {

@@ -19,18 +19,19 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [showMap, setShowMap] = useState(false);
 
-  // Get places data from Rapid API Travel Advisor 
+   // Get places data from Rapid API Travel Advisor 
   async function getPlaces(type, sw, ne) {
-      const places = await getPlacesData(type, sw, ne);
-      setFilteredPlaces([]);
-      setRating('');
-      if (places) {
-        setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-        setIsLoading(false);
-      } else {
-        setPlaces([]);
-        setIsLoading(false);
-      }
+    const places = await getPlacesData(type, sw, ne);
+    setFilteredPlaces([]);
+    setRating('');
+    if (places) {
+      setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
+      console.log('places set');
+      setIsLoading(false);
+    } else {
+      setPlaces([]);
+      setIsLoading(false);
+    }
   }
 
   const onLoad = (ac) => setAutocomplete(ac);
@@ -57,24 +58,28 @@ export default function App() {
     });
   }, []);
 
-  // Get places data from Rapid API Travel Advisor (Desktop)
+  // Get places data from Rapid API on map bounds change
   useEffect(function() {
-    setIsLoading(true);
-    if ((!isMobile && bounds) || (isMobile && showMap)) {
+    if ((!isMobile && bounds) || (isMobile && bounds && showMap)) {
+      setIsLoading(true);
       getPlaces(type, bounds.sw, bounds.ne);
-    } else if (isMobile && coordinates && !showMap) {
+    } 
+  }, [type, bounds, showMap, isMobile]);
+
+  useEffect(function() {
+    if (isMobile && coordinates) {
+      setIsLoading(true);
       const sw = {
-        lat: coordinates.lat - 0.1,
-        lng: coordinates.lng - 0.1
-      }
+      lat: coordinates.lat - 0.1,
+      lng: coordinates.lng - 0.1
+    } 
       const ne = {
         lat: coordinates.lat + 0.1,
         lng: coordinates.lng + 0.1
       }
       getPlaces(type, sw, ne);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, bounds, coordinates]);
+  }, [coordinates, isMobile, type]);
 
   // Filter places by rating
   useEffect(() => {

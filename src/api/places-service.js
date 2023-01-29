@@ -34,11 +34,8 @@ export async function updatedGetPlacesData(type, sw, ne) {
   }
 
   const res = axios.request(options).then(function (response) {
-    // Get array of places from response 
-    const places = response.data.data.AppPresentation_queryAppListV2[0].sections;
-    // filter location data from places
-    const locations = places.filter((place) => place.__typename === 'AppPresentation_SingleCard');
-    return locations;
+    const places = response.data.data.AppPresentation_queryAppListV2[0];
+    return places;
   }).catch(function (error) {
     console.error('error: ', error);
   });

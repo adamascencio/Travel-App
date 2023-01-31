@@ -8,9 +8,21 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
     return <MapMarkers key={idx} lat={Number(place.latitude)} lng={Number(place.longitude)} place={place} isMobile={isMobile} />;
   });
 
+  const mapStyles = isMobile ? 
+    { 
+      position: 'absolute', 
+      height: '95vh', 
+      width: '100vw', 
+      left: 0, 
+      bottom: 0,
+      'z-index': -100
+    } 
+    : 
+    { height: '89vh', width: '100%' };
+
   return (
     <StyledEngineProvider injectFirst>
-      <div className='map' style={{ height: '89vh', width: '100%' }}>
+      <div className='map' style={mapStyles}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
           defaultCenter={{ lat: 0, lng: 0 }}

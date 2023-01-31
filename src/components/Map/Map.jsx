@@ -10,7 +10,7 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
 
   return (
     <StyledEngineProvider injectFirst>
-      <div className='map' style={{ height: '84vh', width: '100%' }}>
+      <div className='map' style={{ height: '89vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
           defaultCenter={{ lat: 0, lng: 0 }}

@@ -36,9 +36,9 @@ export default function List({ places, childClicked, isLoading, type, setType, r
                 <InputLabel>Rating</InputLabel>
                 <Select variant='standard' value={rating} onChange={(evt) => setRating(evt.target.value)} >
                   <MenuItem value={0}>All</MenuItem>
-                  <MenuItem value={3}>Above 3.0</MenuItem>
-                  <MenuItem value={4}>Above 4.0</MenuItem>
-                  <MenuItem value={4.5}>Above 4.5</MenuItem>
+                  <MenuItem value={3}>3.0</MenuItem>
+                  <MenuItem value={4}>4.0</MenuItem>
+                  <MenuItem value={4.5}>4.5+</MenuItem>
                 </Select>
               </FormControl>
             </div>

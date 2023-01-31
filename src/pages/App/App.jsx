@@ -82,7 +82,7 @@ export default function App() {
 
   // Filter places by rating
   useEffect(() => {
-    const filteredPlaces = places.filter((place) => place.rating > rating);
+    const filteredPlaces = places.filter((place) => place.rating >= rating);
     setFilteredPlaces(filteredPlaces);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rating]);

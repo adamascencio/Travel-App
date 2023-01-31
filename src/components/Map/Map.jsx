@@ -15,7 +15,7 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
       width: '100vw', 
       left: 0, 
       bottom: 0,
-      'z-index': -100
+      zIndex: -100
     } 
     : 
     { height: '89vh', width: '100%' };

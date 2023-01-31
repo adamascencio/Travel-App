@@ -1,6 +1,6 @@
 .map-marker {
   position: absolute;
-  z-index: 2000;
+  z-index: 2;
 }
 
 .map-marker:hover {

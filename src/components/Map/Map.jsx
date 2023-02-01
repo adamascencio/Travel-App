@@ -11,11 +11,10 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
   const mapStyles = isMobile ? 
     { 
       position: 'absolute', 
-      height: '95vh', 
+      height: '100vh', 
       width: '100vw', 
       left: 0, 
-      bottom: 0,
-      marginTop: 'auto'
+      top: 0
     } 
     : 
     { height: '89vh', width: '100%' };

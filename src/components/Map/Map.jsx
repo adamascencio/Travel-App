@@ -11,7 +11,7 @@ export default function Map({ coordinates, setCoordinates, setBounds, places, se
   const mapStyles = isMobile ? 
     { 
       position: 'absolute', 
-      height: '100vh', 
+      height: '90vh', 
       width: '100vw', 
       left: 0, 
       top: 0

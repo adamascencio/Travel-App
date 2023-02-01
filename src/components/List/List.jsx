@@ -25,8 +25,8 @@ export default function List({ places, childClicked, isLoading, type, setType, r
           <>
             <div className='input-row'>
               <FormControl>
-                <InputLabel>Type</InputLabel>
-                <Select variant='standard' value={type} onChange={(evt) => setType(evt.target.value)} >
+                <InputLabel sx={{ color: 'white' }} >Type</InputLabel>
+                <Select variant='standard' value={type} onChange={(evt) => setType(evt.target.value)} className='select-bg'>
                   <MenuItem value='restaurants'>Restaurants</MenuItem>
                   <MenuItem value='hotels'>Hotels</MenuItem>
                   <MenuItem value='attractions'>Attractions</MenuItem>
@@ -34,7 +34,7 @@ export default function List({ places, childClicked, isLoading, type, setType, r
               </FormControl>
               <FormControl>
                 <InputLabel>Rating</InputLabel>
-                <Select variant='standard' value={rating} onChange={(evt) => setRating(evt.target.value)} >
+                <Select variant='standard' value={rating} onChange={(evt) => setRating(evt.target.value)} className='select-bg' >
                   <MenuItem value={0}>All</MenuItem>
                   <MenuItem value={3}>3.0</MenuItem>
                   <MenuItem value={4}>4.0</MenuItem>

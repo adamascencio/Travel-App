@@ -17,7 +17,7 @@ input[type="text"] {
   width: clamp(200px, 40vw, 300px);
   text-align: center;
   border-radius: 10px;
-  border: 2px solid var(--tan-3);
+  border: 2px solid var(--tan);
 }
 
 .icon, input[type='text'] {

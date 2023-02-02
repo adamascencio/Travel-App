@@ -7,6 +7,18 @@ import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import './App.css';
 
 export default function App() {
+  const PRICE_RANKINGS = {
+    '$': 1,
+    '$ - $$': 1.5,
+    '$$': 2,
+    '$$ - $$$': 2.5,
+    '$$$': 3,
+    '$$$ - $$$$': 3.5,
+    '$$$$': 4,
+    '$$$$ - $$$$$': 4.5,
+    '$$$$$': 5
+  }
+  
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
   const [places, setPlaces] = useState([]);
@@ -25,6 +37,12 @@ export default function App() {
     setFilteredPlaces([]);
     setRating('');
     if (places) {
+      places.forEach((place) => {
+        place.price_level ? 
+          place['price_ranking'] = PRICE_RANKINGS[place.price_level] 
+          : 
+          place['price_ranking'] = 0;
+      });
       setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
       setIsLoading(false);
     } else {

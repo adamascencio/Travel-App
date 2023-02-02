@@ -21,15 +21,20 @@ export default function PlaceCard({ place, selected, refProp }) {
           <CardMedia 
             component='img'
             height='180'
-            image={place.photo !== undefined ?
+            image={place.photo ?
                 place.photo.images.medium.url
                 :
                 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'
               }
-            alt={place.name}
+            alt={place.photo?.caption}
           />
           <CardContent>
-            <Typography align='left' variant='h6'>{place.name}</Typography>
+            <Box display='flex' flexDirection='column' justifyContent='space-between' alignItems='flex-start' >
+              <Typography align='left' variant='h6'>{place.name}</Typography>
+              {place.hotel_class && 
+                <Typography variant='subtitle2'>{place.subcategory_type_label}</Typography>
+              }
+            </Box>
             <Box display='flex' justifyContent='space-between' alignItems='center' my={2}>
               <Rating readOnly value={parseFloat(place.rating)} />
               <Typography variant='subtitle2'>{place.num_reviews} review{place.num_reviews > 1 && 's'}</Typography>
@@ -46,7 +51,7 @@ export default function PlaceCard({ place, selected, refProp }) {
               {awards}
             </Box>
             <Box display='flex' justify-content='flex-start' align-items='center' sx={{ flexWrap: 'wrap', my: 2 }}>
-              {place?.cuisine?.map(({name}, idx) => {
+              {place.cuisine?.map(({name}, idx) => {
                 return <Chip key={idx} size='small' label={name} sx={{ mb: 0.5, mr: 0.5 }}/>;
               })}
             </Box>
@@ -64,8 +69,15 @@ export default function PlaceCard({ place, selected, refProp }) {
             )}
           </CardContent>
           <CardActions>
-            <Button size='small' color='primary' onClick={() => window.open(place.web_url, '_blank')} >Trip Advisor</Button>
-            <Button size='small' color='primary' onClick={() => window.open(place.website, '_blank')} >Website</Button>
+            {place.web_url && 
+              <Button size='small' color='primary' onClick={() => window.open(place.web_url, '_blank')} >Trip Advisor</Button>
+            }
+            {place.website &&
+              <Button size='small' color='primary' onClick={() => window.open(place.website, '_blank')} >Website</Button>
+            }
+            {place.business_listings?.mobile_contacts[0]?.value && 
+              <Button size='small' color='primary' onClick={() => window.open(place.business_listings.mobile_contacts[0].value, '_blank')} >Trip Advisor</Button>
+            }
           </CardActions>
         </Card>
       </StyledEngineProvider>

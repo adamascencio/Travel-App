@@ -39,46 +39,54 @@ export default function PlaceCard({ place, selected, refProp }) {
               <Rating readOnly value={parseFloat(place.rating)} />
               <Typography variant='subtitle2'>{place.num_reviews} review{place.num_reviews > 1 && 's'}</Typography>
             </Box>
-            <Box display='flex' justifyContent='space-between' alignItems='center' >
-              <Typography>Price</Typography>
-              <Typography variant='subtitle2'>{place.price_level}</Typography>
-            </Box>
+            {place.price_level && 
+              <Box display='flex' justifyContent='space-between' alignItems='center' >
+                <Typography>Price</Typography>
+                <Typography variant='subtitle2'>{place.price_level}</Typography>
+              </Box>
+            }
             <Box display='flex' justifyContent='space-between' alignItems='center' >
               <Typography>Ranking</Typography>
               <Typography variant='subtitle2' align='right'>{place.ranking}</Typography>
             </Box>
-            <Box sx={{ my: 2 }} >
-              {awards}
-            </Box>
-            <Box display='flex' justify-content='flex-start' align-items='center' sx={{ flexWrap: 'wrap', my: 2 }}>
-              {place.cuisine?.map(({name}, idx) => {
-                return <Chip key={idx} size='small' label={name} sx={{ mb: 0.5, mr: 0.5 }}/>;
-              })}
-            </Box>
-            {place.address && (
+            {place.awards.length > 0 && 
+              <Box sx={{ mt: 2 }} >
+                {awards}
+              </Box>
+            }
+            {place.cuisine?.length > 0 && 
+              <Box display='flex' justify-content='flex-start' align-items='center' sx={{ flexWrap: 'wrap', my: 2 }}>
+                {place.cuisine.map(({name}, idx) => {
+                  return <Chip key={idx} size='small' label={name} sx={{ mb: 0.5, mr: 0.5 }}/>;
+                })}
+              </Box>
+            }
+            {place.address && 
               <Box display='flex' justifyContent='space-between' alignItems='center' sx={{ mb: 1 }}>
                 <FontAwesomeIcon icon={faLocationDot} />
                 <Typography variant='body2' align='right'>{place.address}</Typography>
               </Box>
-            )}
-            {place.phone && (
+            }
+            {place.phone && 
               <Box display='flex' justifyContent='space-between' alignItems='center'>
                 <FontAwesomeIcon icon={faPhone} />
                 <Typography variant='body2'>{place.phone}</Typography>
               </Box>
-            )}
+            }
           </CardContent>
-          <CardActions>
-            {place.web_url && 
-              <Button size='small' color='primary' onClick={() => window.open(place.web_url, '_blank')} >Trip Advisor</Button>
-            }
-            {place.website &&
-              <Button size='small' color='primary' onClick={() => window.open(place.website, '_blank')} >Website</Button>
-            }
-            {place.business_listings?.mobile_contacts[0]?.value && 
-              <Button size='small' color='primary' onClick={() => window.open(place.business_listings.mobile_contacts[0].value, '_blank')} >Trip Advisor</Button>
-            }
-          </CardActions>
+          {(place.web_url || place.website || place.business_listings?.mobile_contacts[0]?.value) &&
+            <CardActions>
+              {place.web_url && 
+                <Button size='small' color='primary' onClick={() => window.open(place.web_url, '_blank')} >Trip Advisor</Button>
+              }
+              {place.website &&
+                <Button size='small' color='primary' onClick={() => window.open(place.website, '_blank')} >Website</Button>
+              }
+              {place.business_listings?.mobile_contacts[0]?.value && 
+                <Button size='small' color='primary' onClick={() => window.open(place.business_listings.mobile_contacts[0].value, '_blank')} >Trip Advisor</Button>
+              }
+            </CardActions>
+          }
         </Card>
       </StyledEngineProvider>
     </article>

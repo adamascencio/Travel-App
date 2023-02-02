@@ -21,7 +21,7 @@ export default function App() {
   
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
-  const [priceSort, setPriceSort] = useState('');
+  // const [priceSort, setPriceSort] = useState('');
   const [places, setPlaces] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState([]);

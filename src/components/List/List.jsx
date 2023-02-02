@@ -19,7 +19,7 @@ export default function List({ places, childClicked, isLoading, type, setType, r
         <Typography variant='h5' className='heading'>Restaurants, Hotels & Attractions around you</Typography>
         {isLoading ? (
           <div>
-            <CircularProgress size='5rem' />
+            <CircularProgress size='5rem' sx={{ color: 'white' }} />
           </div>
         ) : (
           <>

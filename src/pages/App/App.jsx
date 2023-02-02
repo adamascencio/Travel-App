@@ -21,6 +21,7 @@ export default function App() {
   
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
+  const [priceSort, setPriceSort] = useState('');
   const [places, setPlaces] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
@@ -81,6 +82,7 @@ export default function App() {
       setIsLoading(true);
       getPlaces(type, bounds.sw, bounds.ne);
     } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, bounds, showMap, isMobile]);
 
   useEffect(function() {
@@ -96,6 +98,7 @@ export default function App() {
       }
       getPlaces(type, sw, ne);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinates, isMobile, type, showMap]);
 
   // Filter places by rating

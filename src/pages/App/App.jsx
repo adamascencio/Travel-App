@@ -21,10 +21,11 @@ export default function App() {
   
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
-  // const [priceSort, setPriceSort] = useState('');
+  const [priceSort, setPriceSort] = useState('');
   const [places, setPlaces] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
+  const [sortedPlaces, setSortedPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
@@ -36,7 +37,9 @@ export default function App() {
   async function getPlaces(type, sw, ne) {
     const places = await getPlacesData(type, sw, ne);
     setFilteredPlaces([]);
+    setSortedPlaces([]);
     setRating('');
+    setPriceSort('');
     if (places) {
       places.forEach((place) => {
         place.price_level ? 
@@ -108,6 +111,22 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rating]);
 
+  // Filter places by price
+  useEffect(() => {
+    // sort prices low to high by price_ranking (a - b)
+    if (priceSort === 0) {
+      console.log('sort low to high')
+      
+    // sort prices high to low by price_ranking (b - a)
+    } else if (priceSort === 1) {
+      console.log('sort high to low')
+      
+    }
+  
+    if (sortedPlaces) setFilteredPlaces(sortedPlaces);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [priceSort, filteredPlaces]);
+
   useEffect(() => setChildClicked(0), [places]);
 
   const map = () => {
@@ -118,7 +137,6 @@ export default function App() {
         bounds={bounds}
         setBounds={setBounds}
         places={filteredPlaces.length ? filteredPlaces : places}
-        rating={rating}
         childClicked={childClicked}
         setChildClicked={setChildClicked}
         isMobile={isMobile}
@@ -136,6 +154,8 @@ export default function App() {
         setType={setType}
         rating={rating} 
         setRating={setRating}
+        priceSort={priceSort}
+        setPriceSort={setPriceSort}
       />
     );
    }

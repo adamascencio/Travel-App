@@ -116,11 +116,17 @@ export default function App() {
     // sort prices low to high by price_ranking (a - b)
     if (priceSort === 0) {
       console.log('sort low to high')
-      
+      setSortedPlaces(filteredPlaces.length ? 
+        filteredPlaces.sort((a, b) => a - b) 
+        : 
+        places.sort((a, b) => a - b));
     // sort prices high to low by price_ranking (b - a)
     } else if (priceSort === 1) {
       console.log('sort high to low')
-      
+      setSortedPlaces(filteredPlaces.length ? 
+        filteredPlaces.sort((a, b) => b - a) 
+        : 
+        places.sort((a, b) => b - a));
     }
   
     if (sortedPlaces) setFilteredPlaces(sortedPlaces);

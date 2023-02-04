@@ -41,13 +41,13 @@ export default function List({ places, childClicked, isLoading, type, setType, r
                   <MenuItem value={4.5}>4.5+</MenuItem>
                 </Select>
               </FormControl>
-              {/* <FormControl>
+              <FormControl>
                 <InputLabel>Price</InputLabel>
                 <Select variant='standard' value={priceSort} onChange={(evt) => setPriceSort(evt.target.value)} className='select-bg' >
                   <MenuItem value={0}>low to high</MenuItem>
                   <MenuItem value={1}>high to low</MenuItem>
                 </Select>
-              </FormControl> */}
+              </FormControl>
             </div>
             <Grid container spacing={3} className='location-col'>
               {places?.map((place, idx) => {

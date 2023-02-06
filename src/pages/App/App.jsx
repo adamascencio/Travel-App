@@ -86,6 +86,7 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, bounds, showMap, isMobile]);
 
+  // Get places data from Rapid API on mobile when bounds from map aren't available
   useEffect(function() {
     if (isMobile && coordinates && !showMap) {
       setIsLoading(true);
@@ -113,7 +114,7 @@ export default function App() {
   useEffect(() => {
     // create a new array to sort
     const arr  = filteredPlaces.length ? [...filteredPlaces] : [...places];
-    
+
     // sort prices low to high by price_ranking Array.sort(a - b)
     if (priceSort === 'low') {
       setFilteredPlaces(arr.sort((a, b) => a.price_ranking - b.price_ranking));

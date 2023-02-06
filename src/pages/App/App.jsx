@@ -25,7 +25,6 @@ export default function App() {
   const [places, setPlaces] = useState([]);
   const [childClicked, setChildClicked] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState([]);
-  const [sortedPlaces, setSortedPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
@@ -37,7 +36,6 @@ export default function App() {
   async function getPlaces(type, sw, ne) {
     const places = await getPlacesData(type, sw, ne);
     setFilteredPlaces([]);
-    setSortedPlaces([]);
     setRating('');
     setPriceSort('');
     if (places) {
@@ -113,25 +111,22 @@ export default function App() {
 
   // Filter places by price
   useEffect(() => {
-    // sort prices low to high by price_ranking (a - b)
-    if (priceSort === 0) {
-      console.log('sort low to high')
-      setSortedPlaces(filteredPlaces.length ? 
-        filteredPlaces.sort((a, b) => a - b) 
-        : 
-        places.sort((a, b) => a - b));
-    // sort prices high to low by price_ranking (b - a)
-    } else if (priceSort === 1) {
-      console.log('sort high to low')
-      setSortedPlaces(filteredPlaces.length ? 
-        filteredPlaces.sort((a, b) => b - a) 
-        : 
-        places.sort((a, b) => b - a));
+    // create a new array to sort
+    const arr  = filteredPlaces.length ? [...filteredPlaces] : [...places];
+    
+    // sort prices low to high by price_ranking Array.sort(a - b)
+    if (priceSort === 'low') {
+      setFilteredPlaces(arr.sort((a, b) => a.price_ranking - b.price_ranking));
+      setChildClicked(0);
+
+    // sort prices high to low by price_ranking Array.sort(b - a)
+    } else if (priceSort === 'high') {
+      setFilteredPlaces(arr.sort((a, b) => b.price_ranking - a.price_ranking));
+      setChildClicked(0);
     }
-  
-    if (sortedPlaces) setFilteredPlaces(sortedPlaces);
+  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [priceSort, filteredPlaces]);
+  , [priceSort]);
 
   useEffect(() => setChildClicked(0), [places]);
 

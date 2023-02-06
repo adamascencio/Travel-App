@@ -44,8 +44,8 @@ export default function List({ places, childClicked, isLoading, type, setType, r
               <FormControl>
                 <InputLabel>Price</InputLabel>
                 <Select variant='standard' value={priceSort} onChange={(evt) => setPriceSort(evt.target.value)} className='select-bg' >
-                  <MenuItem value={0}>low to high</MenuItem>
-                  <MenuItem value={1}>high to low</MenuItem>
+                  <MenuItem value='low'>low to high</MenuItem>
+                  <MenuItem value='high'>high to low</MenuItem>
                 </Select>
               </FormControl>
             </div>

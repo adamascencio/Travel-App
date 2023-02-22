@@ -5,7 +5,7 @@ import './Map.css';
 
 export default function Map({ coordinates, setCoordinates, setBounds, places, setChildClicked, isMobile }) {
   const markers = places?.map((place, idx) => {
-    return <MapMarkers key={idx} lat={Number(place.latitude)} lng={Number(place.longitude)} place={place} isMobile={isMobile} />;
+    return <MapMarkers key={idx} lat={Number(place.latitude)} lng={Number(place.longitude)} place={place} />;
   });
 
   const mapStyles = isMobile ? 

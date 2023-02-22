@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyledEngineProvider } from '@mui/material';
 import './MapMarkers.css';
 
-export function MapMarkers({ isMobile, place }) {
+export function MapMarkers({ place }) {
   const [showCard, setShowCard] = useState(false);
 
   function showLocationCard() {

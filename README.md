@@ -27,7 +27,7 @@ Travel Buddy is an app that helps users find restaurants, hotels, and attraction
 
 ### Links
 
-- Live Site URL: [Click to View App](travel-bud-react.netlify.app/)
+- Live Site URL: [Click to View App](https://travel-bud-react.netlify.app/)
 
 ## My process
 
@@ -35,34 +35,6 @@ Travel Buddy is an app that helps users find restaurants, hotels, and attraction
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Material UI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
-
-### What I learned
-
-**app.jsx**
-```js
-async function getPlaces(type, sw, ne) {
-    const places = await getPlacesData(type, sw, ne);
-    setFilteredPlaces([]);
-    setRating('');
-    setPriceSort('');
-    if (places) {
-      places.forEach((place) => {
-        place.price_level ? 
-          place['price_ranking'] = PRICE_RANKINGS[place.price_level] 
-          : 
-          place['price_ranking'] = 0;
-      });
-      setPlaces(places.filter((place) => place.name && place.num_reviews > 0));
-      setIsLoading(false);
-    } else {
-      setPlaces([]);
-      setIsLoading(false);
-    }
-}
-```
-
-### Future Development
-
 
 ## Author
 
